@@ -1,0 +1,17 @@
+{
+  "name": "@pstack-codex/statechart",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "npm run test:unit && npm run test:windows",
+    "test:unit": "node --test test/chart.test.ts test/messages.test.ts test/pipeline.test.ts",
+    "test:windows": "node --test test/windows.test.ts",
+    "test:upstream": "node --disable-warning=ExperimentalWarning --test test/*.test.ts"
+  },
+  "engines": { "node": ">=24" },
+  "dependencies": { "pele": "1.9.0" },
+  "devDependencies": {
+    "fast-check": "4.5.3"
+  }
+}

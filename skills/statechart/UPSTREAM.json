@@ -1,0 +1,22 @@
+{
+  "repository": "https://github.com/cursor/plugins",
+  "commit": "ae5650febf4320793844c12c4adaa937f417f8da",
+  "path": "pstack/skills/statechart",
+  "adaptation": "statechart-0.1.0",
+  "runtime": {
+    "tlc": "1.7.4",
+    "java": "Temurin 25 JRE Windows x64",
+    "pele": "1.9.0"
+  },
+  "changes": [
+    "Codex explicit invocation policy",
+    "PowerShell launcher with portable runtime",
+    "Windows process-tree cleanup and temporary environment",
+    "CRLF TLC message parsing",
+    "Local SVG renderer",
+    "Windows regression tests",
+    "Hide Java/TLC and dependency subprocess console windows",
+    "Checksum-verified runtime setup and locked npm dependencies",
+    "Self-contained GitHub skill distribution"
+  ]
+}
