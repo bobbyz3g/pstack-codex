@@ -17,6 +17,7 @@
     "Windows regression tests",
     "Hide Java/TLC and dependency subprocess console windows",
     "Checksum-verified runtime setup and locked npm dependencies",
-    "Self-contained GitHub skill distribution"
+    "Self-contained GitHub skill distribution",
+    "ASCII-relative JVM library paths via temporary Windows junctions"
   ]
 }

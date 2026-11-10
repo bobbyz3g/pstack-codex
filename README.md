@@ -75,6 +75,7 @@ node "$skillDir/scripts/render-chart.mjs" 'C:/models/task-result/chart.mmd'
 - 适配 Windows 进程树清理与临时目录变量。
 - 隐藏 Java/TLC 等后台子进程的控制台窗口。
 - 修复 Windows CRLF 输出导致 TLC 违规消息解析失败的问题。
+- 使用临时目录联接避免 JVM 启动参数损坏中文模型路径；不复制或修改源模型。
 - 提供固定版本的 SVG 渲染器，以及真实 TLC、路径、输出保护和进程清理测试。
 
 在限制较强的沙箱中，`taskkill` 或临时目录清理可能需要额外权限。此时应报告失败，不能将任务当作已正确取消。遇到临时目录权限错误，可将本次进程的 `TEMP` 和 `TMP` 指向已有的可写 scratch 目录。

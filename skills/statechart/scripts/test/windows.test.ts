@@ -32,6 +32,7 @@ for (const [name, code] of [['TwoPhase', 1], ['TwoPhaseFixed', 0]] as const) {
     const again = spawnSync(process.execPath, args, { env, encoding: 'utf8', windowsHide: true });
     assert.equal(again.status, 2);
     assert.equal(fs.readFileSync(path.join(out, 'report.md'), 'utf8'), report);
+    assert.equal(fs.readFileSync(path.join(model, `${name}.tla`), 'utf8'), fs.readFileSync(path.join(import.meta.dirname, 'corpus', name, `${name}.tla`), 'utf8'), 'Temporary junction cleanup must preserve the source model');
     fs.rmSync(tmp, { recursive: true, force: true });
   });
 }

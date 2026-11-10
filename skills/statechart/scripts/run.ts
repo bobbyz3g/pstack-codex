@@ -276,6 +276,12 @@ export async function check(specFile: string, configFile: string): Promise<Check
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), "statechart-"));
   try {
     const tlc = await findTlc(dir);
+    // The Windows JVM launcher can replace non-ANSI characters in -D values
+    // with '?'. A local junction keeps the library property ASCII without
+    // copying or modifying the user's model and its adjacent modules.
+    const library = process.platform === "win32" ? "source" : folder;
+    if (process.platform === "win32")
+      fs.symlinkSync(folder, path.join(dir, library), "junction");
     const config = (name: string, sections: ConfigSection[], extra: string[]) => {
       fs.writeFileSync(path.join(dir, `${name}.cfg`), configText(sections, extra));
       return [`-metadir`, path.join(dir, `meta-${name}`), "-config", path.join(dir, `${name}.cfg`)];
@@ -286,8 +292,8 @@ export async function check(specFile: string, configFile: string): Promise<Check
       return runToFiles(
         tlc.java,
         [
-          `-Djava.io.tmpdir=${tmp}`,
-          `-DTLA-Library=${folder}`,
+          `-Djava.io.tmpdir=${process.platform === "win32" ? path.relative(dir, tmp) : tmp}`,
+          `-DTLA-Library=${library}`,
           ...jvm,
           "-cp",
           tlc.jar,
@@ -304,7 +310,7 @@ export async function check(specFile: string, configFile: string): Promise<Check
     const xml = await runJava(
       "sany",
       "tla2sany.xml.XMLExporter",
-      ["-o", "-I", folder, path.resolve(specFile)],
+      ["-o", "-I", library, process.platform === "win32" ? path.join(library, path.basename(specFile)) : path.resolve(specFile)],
       ["-XX:TieredStopAtLevel=1"],
     );
     if (xml.status !== 0)
