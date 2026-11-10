@@ -385,7 +385,7 @@ export async function check(specFile: string, configFile: string): Promise<Check
     const judged = await judge();
     const exit = exitClass(judged.first.status);
     const failed = (r: FileResult) =>
-      new Error(`TLC could not check ${specFile} (exit ${r.status}):\n${stopOf(r).message}`);
+      new Error(`TLC could not check ${specFile} (exit ${r.status}):\n${tail(r)}`);
     const initialOnly = initialOnlyProperties(sany, spec);
     const propertiesWith = (bugOf: (trace: Trace) => Lasso | undefined) => {
       const properties: Property[] = [];
