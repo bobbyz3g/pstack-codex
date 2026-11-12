@@ -10,6 +10,15 @@ permissions:
   contents: read
 
 jobs:
+  skill-packages:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: Install validation dependency
+        run: python3 -m pip install PyYAML==6.0.3
+      - name: Validate independently installable skills
+        run: python3 scripts/validate_skills.py
   statechart-windows:
     runs-on: windows-latest
     timeout-minutes: 15

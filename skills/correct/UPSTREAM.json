@@ -1,0 +1,14 @@
+{
+  "repository": "https://github.com/cursor/plugins",
+  "commit": "a5539b15a3d56e04992565aafee2b37051329ce3",
+  "path": "pstack/skills/correct",
+  "adaptation": "correct-0.1.0",
+  "changes": [
+    "Preserve upstream explicit invocation through Codex agents/openai.yaml",
+    "Separate read-only investigation from authorized implementation and Git actions",
+    "Count independent occurrences rather than multiple references to one bug",
+    "Constrain architectural changes to demonstrated failures and authorized scope",
+    "Require isolated historical negative proofs without overwriting user changes",
+    "Keep rule tables local and avoid implying an automatic correction hook"
+  ]
+}

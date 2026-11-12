@@ -20,7 +20,7 @@ git clone https://github.com/cursor/plugins.git upstream-plugins
 git -C upstream-plugins diff <旧提交> <新提交> -- pstack/skills/statechart
 ```
 
-先看上游改动，再将适用部分带入本仓库。不要用整个上游文件夹覆盖适配版。重点保留 Codex 调用策略、Windows 进程管理、CRLF 解析和隐藏窗口设置。
+先看上游改动，再将适用部分带入本仓库。不要用整个上游文件夹覆盖适配版。按目标技能替换示例路径。保留 Codex 调用策略；statechart 还需保留 Windows 进程管理、CRLF 解析和隐藏窗口设置，correct 需保留授权边界与隔离验证要求。
 
 更新后：
 
@@ -44,3 +44,14 @@ npm --prefix ./skills/statechart/scripts test
 测试覆盖图生成、TLC 消息解析（包括 CRLF）、编译流水线，以及真实 TLC 的违规/通过模型、中文和空格路径、已有输出保护、SVG 渲染、PowerShell 启动和进程树清理。
 
 不要在默认测试中直接运行所有上游测试：其中部分依赖可直接执行的 Unix 脚本和额外工具。若扩展这部分覆盖，应单独完成平台适配并说明所需条件。
+
+## correct 与通用包验证
+
+```powershell
+python -m pip install PyYAML==6.0.3
+python scripts/validate_skills.py
+```
+
+这条命令也在 CI 运行，检查技能发现所需元数据、调用策略、来源记录和许可证。它不执行代理，不证明指令会被正确遵循。
+
+修改 correct 的行为指令后，按 [行为验证步骤](tests/correct/README.md) 在隔离仓库重跑只读与修复场景，记录实际产物及反例结果。不要把测试夹具复制进用户的业务仓库，也不要把模型输出措辞作为断言。
