@@ -1,11 +1,11 @@
 {
   "name": "@pstack-codex/statechart",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
   "type": "module",
   "scripts": {
     "test": "npm run test:unit && npm run test:windows",
-    "test:unit": "node --test test/chart.test.ts test/messages.test.ts test/pipeline.test.ts",
+    "test:unit": "node --test test/chart.test.ts test/messages.test.ts test/pipeline.test.ts test/parent-render.test.ts",
     "test:windows": "node --test test/windows.test.ts",
     "test:upstream": "node --disable-warning=ExperimentalWarning --test test/*.test.ts"
   },

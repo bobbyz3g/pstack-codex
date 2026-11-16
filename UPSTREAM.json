@@ -2,7 +2,7 @@
   "skills": {
     "statechart": {
       "details": "skills/statechart/UPSTREAM.json",
-      "adaptation": "0.1.0",
+      "adaptation": "0.1.1",
       "commit": "ae5650febf4320793844c12c4adaa937f417f8da",
       "supportedPlatforms": [
         "windows-x64"

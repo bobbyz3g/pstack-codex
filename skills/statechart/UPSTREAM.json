@@ -2,7 +2,7 @@
   "repository": "https://github.com/cursor/plugins",
   "commit": "ae5650febf4320793844c12c4adaa937f417f8da",
   "path": "pstack/skills/statechart",
-  "adaptation": "statechart-0.1.0",
+  "adaptation": "statechart-0.1.1",
   "runtime": {
     "tlc": "1.7.4",
     "java": "Temurin 25 JRE Windows x64",
@@ -18,6 +18,14 @@
     "Hide Java/TLC and dependency subprocess console windows",
     "Checksum-verified runtime setup and locked npm dependencies",
     "Self-contained GitHub skill distribution",
-    "ASCII-relative JVM library paths via temporary Windows junctions"
+    "ASCII-relative JVM library paths via temporary Windows junctions",
+    "Port upstream SANY diagnostics through Windows-safe model paths",
+    "Parent-state entry rendering and regression coverage"
+  ],
+  "cherryPicks": [
+    {
+      "commit": "bf0c7cd80abdbf7fe47b634978a7d1b4071f71a7",
+      "scope": "All statechart changes from this commit: SANY diagnostics and parent-state entry rendering"
+    }
   ]
 }

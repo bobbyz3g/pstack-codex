@@ -10,7 +10,7 @@
 
 | 技能 | 功能 | 适配状态 | 验证平台 | 触发方式 |
 | --- | --- | --- | --- | --- |
-| [statechart](skills/statechart/SKILL.md) | 使用 TLA+/TLC 检查状态模型，输出违规路径、Mermaid 图和 SVG | 0.1.0 | Windows x64，Node.js 24 | 手动 `$statechart` |
+| [statechart](skills/statechart/SKILL.md) | 使用 TLA+/TLC 检查状态模型，输出违规路径、Mermaid 图和 SVG | 0.1.1 | Windows x64，Node.js 24 | 手动 `$statechart` |
 | [correct](skills/correct/SKILL.md) | 从重复纠错中找出共同原因，用结构、类型、检查或行为测试防止重犯 | 0.1.0 | Windows 上完成行为验证；技能本身无平台依赖 | 手动 `$correct` |
 
 其他 pstack 技能会在完成适配和验证后加入，不代表上游全部技能都能在 Codex 中直接运行。statechart 的 macOS、Linux 和 Windows ARM 运行时暂未验证。
@@ -106,6 +106,7 @@ node "$skillDir/scripts/render-chart.mjs" 'C:/models/task-result/chart.mmd'
 - 修复 Windows CRLF 输出导致 TLC 违规消息解析失败的问题。
 - 使用临时目录联接避免 JVM 启动参数损坏中文模型路径；不复制或修改源模型。
 - 提供固定版本的 SVG 渲染器，以及真实 TLC、路径、输出保护和进程清理测试。
+- 同步上游 `bf0c7cd` 的 SANY 行列诊断和父状态入口箭头修复，覆盖中文路径下的解析错误及 SVG 标题栏避让。
 
 在限制较强的沙箱中，`taskkill` 或临时目录清理可能需要额外权限。此时应报告失败，不能将任务当作已正确取消。遇到临时目录权限错误，可将本次进程的 `TEMP` 和 `TMP` 指向已有的可写 scratch 目录。
 
@@ -114,6 +115,8 @@ node "$skillDir/scripts/render-chart.mjs" 'C:/models/task-result/chart.mmd'
 更新前先备份已安装的技能，保留本地修改。用新版本完整替换对应技能目录，不要只覆盖 `SKILL.md`。statechart 还需要重新执行 `setup-runtime.ps1`；correct 没有运行依赖安装步骤。
 
 来源与适配记录见 [UPSTREAM.json](UPSTREAM.json)，每个技能也携带自己的来源记录。仓库固定到已验证的上游提交，不会静默跟随 `main`。新增技能及同步流程见 [CONTRIBUTING.md](CONTRIBUTING.md)。
+
+statechart 0.1.1 保留原始上游基线，另在技能来源记录的 `cherryPicks` 中记录本次同步的修复提交；这不代表已同步上游基线之后的全部改动。
 
 开发验证：
 

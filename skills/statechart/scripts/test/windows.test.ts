@@ -37,6 +37,32 @@ for (const [name, code] of [['TwoPhase', 1], ['TwoPhaseFixed', 0]] as const) {
   });
 }
 
+for (const [name, definitions, diagnostic] of [
+  ['unknown name', ["Init == x = 0", "Next == x' = y"], /line 4, col 14.*\n+Unknown operator: `y'/],
+  ['parse error', ["Init == x = = 0", "Next == x' = x"], /Encountered "0" at line 3, column 15/],
+  ['many errors', ['Init == x = 0', ...Array.from({ length: 12 }, (_, i) => `D${i} == u${i}`), "Next == x' = x"], /\*\*\* Errors: 12\n+line 4, col 7.*\n+Unknown operator: `u0'/],
+] as const) {
+  test(`SANY reports ${name} with source locations in a Unicode path`, { skip: process.platform !== 'win32' }, () => {
+    const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'statechart 诊断-'));
+    try {
+      const spec = path.join(tmp, 'Broken.tla');
+      fs.writeFileSync(spec, ['---- MODULE Broken ----', 'VARIABLE x', ...definitions, '===='].join('\n'));
+      fs.writeFileSync(path.join(tmp, 'Broken.cfg'), 'INIT Init\nNEXT Next\n');
+      const out = path.join(tmp, 'result');
+      const result = spawnSync(process.execPath, [path.join(scripts, 'statechart.ts'), spec, '--out', out], { env, encoding: 'utf8', windowsHide: true });
+      const error = result.stderr.replace(/\r\n/g, '\n');
+      assert.equal(result.status, 2, error);
+      assert.match(error, diagnostic);
+      assert.doesNotMatch(error, /^\s+at tla2sany\./m);
+      if (name === 'many errors') assert.match(error, /\.\.\. \d+ more lines/);
+      assert.equal(fs.existsSync(path.join(out, 'report.md')), false);
+      assert.equal(fs.existsSync(spec), true, 'Diagnostic cleanup preserves the source');
+    } finally {
+      fs.rmSync(tmp, { recursive: true, force: true });
+    }
+  });
+}
+
 test('PowerShell launcher locates its installed runtime without environment overrides', { skip: process.platform !== 'win32' }, () => {
   const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'statechart launcher-'));
   const cleanEnv = { ...process.env };
