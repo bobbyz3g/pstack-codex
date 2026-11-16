@@ -1,0 +1,11 @@
+{
+  "repository": "https://github.com/cursor/plugins",
+  "commit": "bf0c7cd80abdbf7fe47b634978a7d1b4071f71a7",
+  "path": "pstack/skills/tdd",
+  "adaptation": "tdd-0.1.0",
+  "changes": [
+    "Preserve upstream explicit invocation with Codex policy",
+    "Keep upstream red-green workflow within user-authorized implementation scope",
+    "No new skill tests or behavioral evaluations; upstream skill directory has no test suite"
+  ]
+}

@@ -17,6 +17,42 @@
         "platform-independent"
       ],
       "path": "pstack/skills/correct"
+    },
+    "why": {
+      "details": "skills/why/UPSTREAM.json",
+      "adaptation": "0.1.0",
+      "commit": "bf0c7cd80abdbf7fe47b634978a7d1b4071f71a7",
+      "supportedPlatforms": [
+        "platform-independent"
+      ],
+      "path": "pstack/skills/why"
+    },
+    "how": {
+      "details": "skills/how/UPSTREAM.json",
+      "adaptation": "0.1.0",
+      "commit": "bf0c7cd80abdbf7fe47b634978a7d1b4071f71a7",
+      "supportedPlatforms": [
+        "platform-independent"
+      ],
+      "path": "pstack/skills/how"
+    },
+    "tdd": {
+      "details": "skills/tdd/UPSTREAM.json",
+      "adaptation": "0.1.0",
+      "commit": "bf0c7cd80abdbf7fe47b634978a7d1b4071f71a7",
+      "supportedPlatforms": [
+        "platform-independent"
+      ],
+      "path": "pstack/skills/tdd"
+    },
+    "no-comments": {
+      "details": "skills/no-comments/UPSTREAM.json",
+      "adaptation": "0.1.0",
+      "commit": "bf0c7cd80abdbf7fe47b634978a7d1b4071f71a7",
+      "supportedPlatforms": [
+        "platform-independent"
+      ],
+      "path": "pstack/skills/no-comments"
     }
   },
   "repository": "https://github.com/cursor/plugins"

@@ -12,8 +12,44 @@
 | --- | --- | --- | --- | --- |
 | [statechart](skills/statechart/SKILL.md) | 使用 TLA+/TLC 检查状态模型，输出违规路径、Mermaid 图和 SVG | 0.1.1 | Windows x64，Node.js 24 | 手动 `$statechart` |
 | [correct](skills/correct/SKILL.md) | 从重复纠错中找出共同原因，用结构、类型、检查或行为测试防止重犯 | 0.1.0 | Windows 上完成行为验证；技能本身无平台依赖 | 手动 `$correct` |
+| [why](skills/why/SKILL.md) | 根据提交与讨论解释设计原因，区分证据和推断 | 0.1.0 | 无平台依赖；未做行为评估 | 手动 `$why` |
+| [how](skills/how/SKILL.md) | 只读解释代码结构、职责和运行流程 | 0.1.0 | 无平台依赖；未做行为评估 | 手动 `$how` |
+| [tdd](skills/tdd/SKILL.md) | 用便宜且可靠的失败测试驱动 Bug 修复 | 0.1.0 | 无平台依赖；未做行为评估 | 手动 `$tdd` |
+| [no-comments](skills/no-comments/SKILL.md) | 审查冗余注释、约束和抑制指令，在授权范围内清理 | 0.1.0 | 无平台依赖；未做行为评估 | 手动 `$no-comments` |
 
-其他 pstack 技能会在完成适配和验证后加入，不代表上游全部技能都能在 Codex 中直接运行。statechart 的 macOS、Linux 和 Windows ARM 运行时暂未验证。
+其他 pstack 技能按需适配，并分别说明验证范围，不代表上游全部技能都能在 Codex 中直接运行。statechart 的 macOS、Linux 和 Windows ARM 运行时暂未验证。
+
+## 安装和使用 why、how、tdd、no-comments
+
+四个技能均可独立安装，无需 poteto-mode、WSL 或额外运行时。任务本身需要的 Git 历史、项目依赖和可用工具由目标项目提供。保留上游名称 `no-comments`，不是 `nocomment`。
+
+在 Codex 中发送下面的安装请求，也可以只选择其中一个目录：
+
+```text
+使用 skill-installer 从 bobbyz3g/pstack-codex 安装以下技能：
+skills/why
+skills/how
+skills/tdd
+skills/no-comments
+```
+
+安装后下一轮使用；若未出现，重启 Codex。示例：
+
+```text
+$why 为什么订单模块使用异步回调？查阅相关提交和讨论，只读回答，指出证据缺口。
+
+$how 解释订单取消从 API 到执行器的调用流程和状态归属，不修改文件。
+
+$tdd 修复报价接口接受负折扣的问题。先运行能复现错误的测试，再修复，不提交。
+
+$no-comments 只读审查当前分支改动中的注释，指出冗余说明和需要保留的约束。
+
+$no-comments 按刚才的审查清理冗余注释，保留公共 API 文档和未解决约束，不改业务行为、不提交。
+```
+
+`how` 和 `no-comments` 在允许且支持委派时使用一个独立子代理，否则直接完成并说明降级。`no-comments` 自带审查说明，不依赖 Cursor 的 comment-sicko 注册、why 或 architect 技能；与上游不同，未解决的约束和正确性抑制不能仅为清理注释而删除。只读请求不改文件，结构性修复遵循已有授权范围。
+
+上游 0.15.42 中这四个技能目录均只有 SKILL.md，没有各自的测试套件。按本仓库维护者要求，本次未新增或运行技能行为测试；已有 CI 包校验仍会检查元数据和来源记录，不能据此宣称代理行为已验证。`tdd` 在实际修复任务中指导用户项目编写回归测试，与技能仓库自身是否有测试是两回事。
 
 ## 安装和使用 correct
 
