@@ -12,6 +12,7 @@
 | --- | --- | --- | --- | --- |
 | [statechart](skills/statechart/SKILL.md) | 使用 TLA+/TLC 检查状态模型，输出违规路径、Mermaid 图和 SVG | 0.1.1 | Windows x64，Node.js 24 | 手动 `$statechart` |
 | [correct](skills/correct/SKILL.md) | 从重复纠错中找出共同原因，用结构、类型、检查或行为测试防止重犯 | 0.1.0 | Windows 上完成行为验证；技能本身无平台依赖 | 手动 `$correct` |
+| [reframe](skills/reframe/SKILL.md) | 区分需求的可能含义，核实领域术语并重写描述 | 0.1.0 | 无平台依赖；未做行为评估 | 手动 `$reframe` |
 | [why](skills/why/SKILL.md) | 根据提交与讨论解释设计原因，区分证据和推断 | 0.1.0 | 无平台依赖；未做行为评估 | 手动 `$why` |
 | [how](skills/how/SKILL.md) | 只读解释代码结构、职责和运行流程 | 0.1.0 | 无平台依赖；未做行为评估 | 手动 `$how` |
 | [tdd](skills/tdd/SKILL.md) | 用便宜且可靠的失败测试驱动 Bug 修复 | 0.1.0 | 无平台依赖；未做行为评估 | 手动 `$tdd` |
@@ -19,14 +20,15 @@
 
 其他 pstack 技能按需适配，并分别说明验证范围，不代表上游全部技能都能在 Codex 中直接运行。statechart 的 macOS、Linux 和 Windows ARM 运行时暂未验证。
 
-## 安装和使用 why、how、tdd、no-comments
+## 安装和使用 reframe、why、how、tdd、no-comments
 
-四个技能均可独立安装，无需 poteto-mode、WSL 或额外运行时。任务本身需要的 Git 历史、项目依赖和可用工具由目标项目提供。保留上游名称 `no-comments`，不是 `nocomment`。
+这些技能均可独立安装，无需 poteto-mode、WSL 或额外运行时。任务本身需要的 Git 历史、项目依赖和可用工具由目标项目提供。保留上游名称 `no-comments`，不是 `nocomment`。
 
 在 Codex 中发送下面的安装请求，也可以只选择其中一个目录：
 
 ```text
 使用 skill-installer 从 bobbyz3g/pstack-codex 安装以下技能：
+skills/reframe
 skills/why
 skills/how
 skills/tdd
@@ -36,6 +38,8 @@ skills/no-comments
 安装后下一轮使用；若未出现，重启 Codex。示例：
 
 ```text
+$reframe 根据导出模块的代码和领域文档，区分“任务”和“执行”，核实术语并重写需求。
+
 $why 为什么订单模块使用异步回调？查阅相关提交和讨论，只读回答，指出证据缺口。
 
 $how 解释订单取消从 API 到执行器的调用流程和状态归属，不修改文件。

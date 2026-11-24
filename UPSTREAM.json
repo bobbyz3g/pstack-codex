@@ -53,6 +53,15 @@
         "platform-independent"
       ],
       "path": "pstack/skills/no-comments"
+    },
+    "reframe": {
+      "details": "skills/reframe/UPSTREAM.json",
+      "adaptation": "0.1.0",
+      "commit": "9e278fe4d4ecd8bfe98b1b79bf4be662efb338cc",
+      "supportedPlatforms": [
+        "platform-independent"
+      ],
+      "path": "pstack/skills/reframe"
     }
   },
   "repository": "https://github.com/cursor/plugins"

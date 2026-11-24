@@ -1,0 +1,11 @@
+{
+  "repository": "https://github.com/cursor/plugins",
+  "commit": "9e278fe4d4ecd8bfe98b1b79bf4be662efb338cc",
+  "path": "pstack/skills/reframe",
+  "adaptation": "reframe-0.1.0",
+  "changes": [
+    "Codex explicit invocation policy",
+    "Verify sources with available retrieval tools and disclose gaps",
+    "Return proposed vocabulary in chat unless documentation edits are requested"
+  ]
+}
